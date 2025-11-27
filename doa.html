@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doa Harian</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fffbe9;
+    text-align: center;
+
+    /* Islamic gradient background */
+    background: linear-gradient(135deg, #0a3d2f, #0f5132, #064e3b, #1b4332);
+    background-size: 400% 400%;
+    animation: bgMove 25s infinite ease-in-out;
+
+    /* Islamic pattern */
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  @keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating Islamic pattern */
+  body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('image/petok2.jpg');
+
+    opacity: 0.07;
+    background-size: 450px;
+    animation: float 40s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-2000px); }
+  }
+
+  h1 {
+    margin-top: 55px;
+    font-size: 3rem;
+    color: #ffefc2;
+    text-shadow: 0 0 18px #f2d27c;
+    animation: glow 3s infinite alternate;
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes glow {
+    0% { text-shadow: 0 0 18px #f9d976; }
+    100% { text-shadow: 0 0 35px #ffecb3; }
+  }
+
+  .doa-card {
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 25px auto;
+    max-width: 760px;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(6px);
+    transition: 0.4s;
+    box-shadow: 0 0 18px rgba(255, 215, 0, 0.25);
+    border: 1px solid rgba(255, 215, 0, 0.28);
+  }
+
+  .doa-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 0 28px rgba(255, 215, 0, 0.45);
+  }
+
+  .doa-name {
+    font-size: 1.7rem;
+    color: #ffeaa7;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .doa-text {
+    font-size: 1.35rem;
+    margin: 10px 0;
+    line-height: 1.8;
+    color: #fff7db;
+  }
+
+  .doa-translation {
+    font-size: 1.15rem;
+    margin-top: 12px;
+    opacity: 0.92;
+    color: #ffffff;
+  }
+
+  .back-btn {
+    display: inline-block;
+    margin: 40px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: rgba(255, 215, 0, 0.18);
+    color: #fff;
+    border: 1px solid #d4af37;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 600;
+  }
+
+  .back-btn:hover {
+    background: #d4af37;
+    color: #064e3b;
+    box-shadow: 0 0 20px #d4af37;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>🤲 Doa Harian</h1>
+
+<!-- START DOA LIST -->
+
+<div class="doa-card">
+  <div class="doa-name">Doa Pagi</div>
+  <div class="doa-text">اللّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ ...</div>
+  <div class="doa-translation">
+    Ya Allah, Engkaulah Tuhanku, tiada Tuhan selain-Mu. Berkatilah pagiku dengan rahmat-Mu.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Malam</div>
+  <div class="doa-text">اللّهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا ...</div>
+  <div class="doa-translation">
+    Ya Allah, dengan rahmat-Mu kami melalui malam dan siang. Lindungilah kami sepanjang malam ini.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Keselamatan</div>
+  <div class="doa-text">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً ...</div>
+  <div class="doa-translation">
+    Tuhan kami, kurniakanlah kami kebaikan di dunia dan akhirat, serta hindarkan kami dari azab neraka.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Keberkatan Ilmu</div>
+  <div class="doa-text">رَبِّ زِدْنِي عِلْمًا</div>
+  <div class="doa-translation">
+    Ya Tuhanku, tambahkanlah ilmu kepadaku dan berkatilah pemahamanku.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Mohon Kejayaan</div>
+  <div class="doa-text">رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ</div>
+  <div class="doa-translation">
+    Ya Allah, jadikanlah aku hamba yang sentiasa bersyukur dan berjaya di dunia serta akhirat.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Kesihatan</div>
+  <div class="doa-text">اللّهُمَّ عَافِنِي فِي بَدَنِي وَسَمْعِي وَبَصَرِي</div>
+  <div class="doa-translation">
+    Ya Allah, peliharalah tubuhku, pendengaranku dan penglihatanku dari penyakit.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Perlindungan Dari Syaitan</div>
+  <div class="doa-text">أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ ...</div>
+  <div class="doa-translation">
+    Aku berlindung dengan kalimah Allah yang sempurna dari segala kejahatan makhluk.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Ketenangan Hati</div>
+  <div class="doa-text">اللّهُمَّ أَنْتَ السَّكِينَةُ فِي قَلْبِي</div>
+  <div class="doa-translation">
+    Ya Allah, Engkaulah ketenangan di dalam hatiku. Berikan aku damai dan reda-Mu.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Memohon Ampunan</div>
+  <div class="doa-text">رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ</div>
+  <div class="doa-translation">
+    Ya Tuhanku, ampunilah dosa-dosaku dan terimalah taubatku.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Memohon Petunjuk</div>
+  <div class="doa-text">اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ</div>
+  <div class="doa-translation">
+    Tunjukkanlah kami jalan yang lurus dan jauhkan kami dari kesesatan.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Keselamatan Keluarga</div>
+  <div class="doa-text">رَبِّ احْفَظْ أَهْلِي ...</div>
+  <div class="doa-translation">
+    Ya Allah, lindungilah ahli keluargaku daripada bahaya dan kejahatan.
+  </div>
+</div>
+
+<div class="doa-card">
+  <div class="doa-name">Doa Kekuatan Menghadapi Ujian</div>
+  <div class="doa-text">رَبِّ أَوْزِعْنِي أَنْ أَصْبِرَ ...</div>
+  <div class="doa-translation">
+    Ya Tuhanku, berikan aku kekuatan dan kesabaran ketika menghadapi ujian.
+  </div>
+</div>
+
+<!-- BACK BUTTON -->
+<a href="index.html" class="back-btn">🏠 Kembali ke Halaman Utama</a>
+
+</body>
+</html>

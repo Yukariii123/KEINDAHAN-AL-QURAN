@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📖 Tentang Laman — Interaktif & Multimedia</title>
+<style>
+  /* ===== Global ===== */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, html {
+    font-family: 'Poppins', sans-serif;
+    color: #fffbe9;
+    line-height: 1.6;
+    padding: 30px 15px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  /* Video background */
+  .video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1; /* letak belakang semua content */
+    object-fit: cover;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #f5e7b2;
+    text-shadow: 0 0 15px #d4af37;
+    animation: glow 3s infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 15px #f9d976; }
+    to { text-shadow: 0 0 30px #ffecb3; }
+  }
+
+  .surah-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    padding: 25px 20px;
+    max-width: 900px;
+    margin: 15px auto;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .surah-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin: 15px 0;
+    color: #ffeaa7;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  p { margin-bottom: 15px; }
+  ul { text-align: left; margin-left: 20px; margin-bottom: 15px; }
+  li { margin-bottom: 8px; }
+
+  /* Multimedia carousel */
+  .multimedia-carousel {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 10px 0;
+    margin-bottom: 15px;
+  }
+
+  .media-card {
+    min-width: 300px;
+    max-width: 350px;
+    flex: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 12px;
+    scroll-snap-align: start;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .media-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(212,175,55,0.5);
+  }
+
+  video, audio {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 5px;
+  }
+
+  .back-btn {
+    display: inline-block;
+    margin: 25px;
+    padding: 12px 30px;
+    border-radius: 25px;
+    background: rgba(255, 215, 0, 0.15);
+    color: #fff;
+    border: 1px solid #d4af37;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: 500;
+  }
+
+  .back-btn:hover {
+    background: #d4af37;
+    color: #064e3b;
+    box-shadow: 0 0 15px #d4af37;
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 2rem; }
+    .section-title { font-size: 1.3rem; }
+    .media-card { min-width: 250px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Video Background -->
+<video class="video-bg" autoplay muted loop>
+  <source src="image/Video1.mp4" type="video/mp4">
+  Browser awak tak support video.
+</video>
+
+<h1>📖 Tentang Laman</h1>
+
+<div class="surah-card">
+  <div class="section-title">Misi Laman</div>
+  <p>
+    Laman ini direka untuk memudahkan umat Islam belajar Al-Quran, doa harian, dan renungan
+    harian dengan cara interaktif dan menarik. Ia membantu memperkukuh akhlak melalui pendekatan digital.
+  </p>
+
+  <div class="section-title">Ciri-ciri Utama</div>
+  <ul>
+    <li>💡 Doa Harian interaktif lengkap dengan terjemahan dan audio bacaan.</li>
+    <li>📜 Hadis ringkas dan mudah difahami untuk pengingatan harian.</li>
+    <li>🎥 Asbab Nuzul dan maksud Surah.</li>
+    <li>🔊 Ayat Motivasi Serta Doa Harian.</li>
+    <li>🎨 Reka bentuk moden, responsive dan mesra pengguna.</li>
+  </ul>
+
+  <div class="section-title">Pengguna Sasaran</div>
+  <p>
+    Laman ini sesuai untuk pelajar, guru, dan semua umat Islam yang ingin memperdalam ilmu
+    agama secara digital dengan cara mudah dan menyeronokkan.
+  </p>
+
+</div>
+
+<a href="index.html" class="back-btn">🏠 Kembali ke Halaman Utama</a>
+
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ayat Harian — Quranic Verses (Arab + Terjemahan)</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#e8fdf3;
+  --bg2:#f9f7ef;
+  --text:#053827;
+  --muted:#176b4a;
+  --accent:#d4af37;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",Arial;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(220,255,240,.5) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(255,255,230,.6) 0%, transparent 50%),
+    linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  padding:28px;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('image/petok2.jpg');
+  opacity:0.22;
+  z-index:0;
+}
+header{
+  width:100%;
+  max-width:950px;
+  text-align:center;
+  margin-bottom:22px;
+  z-index:1;
+  animation:fadeIn 1s ease;
+}
+h1{font-size:2rem;color:var(--muted);margin-bottom:6px}
+.sub{font-size:.95rem;color:#0b4f3a;opacity:.95}
+main.container{width:100%;max-width:920px;z-index:1;position:relative;animation:fadeUp .8s ease}
+.glow{position:absolute;top:-80px;left:-80px;width:420px;height:420px;background:radial-gradient(circle,rgba(212,175,55,0.12),transparent 70%);filter:blur(28px);z-index:0;animation:pulse 6s infinite ease-in-out alternate}
+.card{background:rgba(255,255,255,0.92);backdrop-filter:blur(6px);border-radius:16px;padding:26px;box-shadow:0 10px 28px rgba(0,0,0,0.08);border:1px solid rgba(11,107,74,0.08);position:relative;overflow:hidden}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.tag{background:linear-gradient(90deg,#f9f1d0,#fff0b8);color:#0b5136;padding:6px 12px;border-radius:999px;font-weight:600;font-size:.9rem;box-shadow:0 3px 10px rgba(212,175,55,0.15)}
+.ref{color:var(--muted);font-size:.95rem;opacity:.95}
+.arabic{font-family:"Amiri",serif;font-size:1.6rem;color:#08392e;line-height:1.6;text-align:center;margin:10px 0}
+.trans{font-size:1rem;color:#0b5136;opacity:.95;text-align:center;margin-bottom:10px;line-height:1.5}
+.meta-bottom{display:flex;justify-content:center;gap:14px;margin-top:6px}
+.controls{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:14px}
+.btn{padding:10px 18px;border-radius:12px;border:1px solid rgba(11,107,74,0.08);background:linear-gradient(180deg,#ffffff,#f7fff8);color:var(--muted);font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(6,40,28,0.06);transition:all .25s ease;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(6,40,28,0.12)}
+.btn.secondary{background:transparent;border:1px dashed rgba(11,107,74,0.1)}
+.all-grid{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.minicard{background:linear-gradient(180deg,#ffffffb8,#f8fff6db);padding:12px;border-radius:10px;box-shadow:0 6px 16px rgba(6,40,28,0.05);cursor:pointer;border:1px solid rgba(11,107,74,0.04)}
+.minicard .arab{font-family:"Amiri",serif;font-size:1rem;color:#08392e;margin-bottom:6px}
+.minicard .tr{font-size:.95rem;color:#125c43;font-style:italic}
+footer{margin-top:20px;width:100%;max-width:920px;color:rgba(4,44,30,0.7);font-size:.92rem;padding:18px 6px;text-align:center;z-index:1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1}}
+@keyframes pulse{from{opacity:.4;transform:scale(1);}to{opacity:.8;transform:scale(1.15)}}
+@media(max-width:640px){h1{font-size:1.5rem}.arabic{font-size:1.25rem}.card{padding:18px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🌙 Ayat Harian — Al-Qur'an (Arab + Terjemahan)</h1>
+  <div class="sub">Tekan "Tukar Ayat" untuk ayat rawak — 50 ayat pendek disediakan</div>
+</header>
+
+<main class="container">
+  <div class="glow" aria-hidden="true"></div>
+
+  <section class="card" id="ayat-card" aria-live="polite">
+    <div class="meta">
+      <div class="tag" id="ayat-number">Ayat 1</div>
+      <div class="ref" id="ayat-ref">Surah & Ayat</div>
+    </div>
+
+    <div id="ayat-arabic" class="arabic">Memuatkan ayat...</div>
+    <div id="ayat-trans" class="trans"></div>
+
+    <div class="meta-bottom">
+      <div style="font-size:.92rem;color:#0b5136">Baca perlahan, tadabbur dan hayati maksud</div>
+    </div>
+
+    <div class="controls">
+      <button id="randomBtn" class="btn">🔄 Tukar Ayat</button>
+      <button id="allBtn" class="btn secondary">📚 Lihat Semua</button>
+      <a href="index.html" class="btn">🏠 Halaman Utama</a>
+    </div>
+  </section>
+
+  <section id="all-section" style="display:none;margin-top:16px"></section>
+</main>
+
+<footer>
+  Senarai 50 ayat ringkas untuk pengingatan harian. Sila rujuk terjemahan & tafsir rasmi untuk penjelasan penuh.
+</footer>
+
+<script>
+  // 50 ayat: arabic, ref (surah:aya), translation (Melayu)
+  // Sumber terjemahan ringkas (untuk pengguna); rujuk tafsir untuk detail
+  const verses = [
+    {arab:"بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ", ref:"Al-Fatihah:1", trans:"Dengan nama Allah, Yang Maha Pemurah, Lagi Maha Penyayang."},
+    {arab:"ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَـٰلَمِينَ", ref:"Al-Fatihah:2", trans:"Segala puji bagi Allah, Tuhan sekalian alam."},
+    {arab:"ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ", ref:"Al-Fatihah:3", trans:"Yang Maha Pemurah, Lagi Maha Penyayang."},
+    {arab:"مَـٰلِكِ يَوْمِ ٱلدِّينِ", ref:"Al-Fatihah:4", trans:"Pemilik hari pembalasan."},
+    {arab:"إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ", ref:"Al-Fatihah:5", trans:"Hanya kepada Engkaulah kami menyembah dan hanya kepada Engkaulah kami mohon pertolongan."},
+    {arab:"ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ", ref:"Al-Fatihah:6", trans:"Tunjukilah kami jalan yang lurus."},
+    {arab:"صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ...", ref:"Al-Fatihah:7", trans:"(Iaitu) jalan orang-orang yang Engkau telah beri nikmat kepada mereka... (terjemahan ringkas)."},
+    {arab:"اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ", ref:"Al-Baqarah:255 (Ayat Kursi awal)", trans:"Allah — tiada tuhan selain Dia, Yang hidup lagi terus-menerus mengurus (makhluk-Nya)."},
+    {arab:"قُلْ هُوَ اللَّهُ أَحَدٌ", ref:"Al-Ikhlas:1", trans:"Katakanlah (Muhammad), \"Dialah Allah, Yang Maha Esa.\""},
+    {arab:"اللَّهُ الصَّمَدُ", ref:"Al-Ikhlas:2", trans:"Allah tempat meminta bagi segala sesuatu (tidak bergantung kepada sesiapa)."},
+    {arab:"لَمْ يَلِدْ وَلَمْ يُولَدْ", ref:"Al-Ikhlas:3", trans:"Dia tidak beranak dan tidak pula diperanakkan."},
+    {arab:"وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌ", ref:"Al-Ikhlas:4", trans:"Dan tidak ada seorangpun yang setara dengan Dia."},
+    {arab:"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ", ref:"Al-Falaq:1", trans:"Katakanlah, \"Aku berlindung kepada Tuhan yang menguasai waktu subuh,"},
+    {arab:"مِن شَرِّ مَا خَلَقَ", ref:"Al-Falaq:2", trans:"dari kejahatan makhluk-Nya,"},
+    {arab:"وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ", ref:"Al-Falaq:3", trans:"dan dari kejahatan malam apabila telah gelap gulita,"},
+    {arab:"وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ", ref:"Al-Falaq:4", trans:"dari kejahatan wanita-wanita yang meniup pada buhul (sihir),"},
+    {arab:"وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ", ref:"Al-Falaq:5", trans:"dan dari kejahatan orang yang dengki apabila ia dengki."},
+    {arab:"قُلْ أَعُوذُ بِرَبِّ النَّاسِ", ref:"An-Nas:1", trans:"Katakanlah: \"Aku berlindung kepada Tuhan (yang memelihara dan menguasai) manusia,"},
+    {arab:"مَلِكِ النَّاسِ", ref:"An-Nas:2", trans:"Raja manusia,"},
+    {arab:"إِلَـٰهِ النَّاسِ", ref:"An-Nas:3", trans:"Tuhan manusia,"},
+    {arab:"مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ", ref:"An-Nas:4", trans:"dari kejahatan bisikan (syaitan) yang tersembunyi,"},
+    {arab:"الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ", ref:"An-Nas:5", trans:"yang membisikkan (kejahatan) ke dalam dada manusia,"},
+    {arab:"مِنَ الْجِنَّةِ وَالنَّاسِ", ref:"An-Nas:6", trans:"daripada (golongan) jin dan manusia."},
+    {arab:"وَالْعَصْرِ", ref:"Al-Asr:1", trans:"Demi masa."},
+    {arab:"إِنَّ الْإِنسَانَ لَفِي خُسْرٍ", ref:"Al-Asr:2", trans:"Sesungguhnya manusia itu benar-benar berada dalam kerugian."},
+    {arab:"إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ", ref:"Al-Asr:3", trans:"kecuali orang-orang yang beriman dan mengerjakan amal soleh... (ringkas)."},
+    {arab:"قُلْ يَا أَيُّهَا الْكَافِرُونَ", ref:"Al-Kafirun:1", trans:"Katakanlah: \"Hai orang-orang kafir,"},
+    {arab:"لَا أَعْبُدُ مَا تَعْبُدُونَ", ref:"Al-Kafirun:2", trans:"aku tidak akan menyembah apa yang kamu sembah."},
+    {arab:"وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ", ref:"Al-Kafirun:3", trans:"Dan kamu bukan penyembah apa yang aku sembah."},
+    {arab:"لَكُمْ دِينُكُمْ وَلِيَ دِينِ", ref:"Al-Kafirun:4", trans:"Bagi kamu agamamu, dan bagi aku agamaku."},
+    {arab:"إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ", ref:"Al-Kawthar:1", trans:"Sesungguhnya Kami telah memberikan kepadamu nikmat yang banyak."},
+    {arab:"فَصَلِّ لِرَبِّكَ وَانْحَرْ", ref:"Al-Kawthar:2", trans:"Maka dirikanlah solat karena Tuhanmu dan berkorbanlah."},
+    {arab:"إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ", ref:"Al-Kawthar:3", trans:"Sesungguhnya orang yang membencimu itulah yang terputus (dari segala kebaikan)."},
+    {arab:"إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ", ref:"An-Nasr:1", trans:"Apabila datang pertolongan Allah dan kemenangan,"},
+    {arab:"وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ", ref:"An-Nasr:2", trans:"dan kamu melihat manusia masuk agama Allah dalam berbondong-bondong,"},
+    {arab:"فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ", ref:"An-Nasr:3", trans:"maka bertasbihlah dengan memuji Tuhanmu dan mohonlah ampun kepada-Nya."},
+    {arab:"عَسَىٰ أَنْ تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَكُمْ", ref:"Al-Baqarah:216 (potongan)", trans:"Boleh jadi kamu membenci sesuatu, padahal ia baik bagimu."},
+    {arab:"وَعَسَىٰ أَنْ تُحِبُّوا شَيْئًا وَهُوَ شَرٌّ لَكُمْ", ref:"Al-Baqarah:216 (potongan)", trans:"Dan boleh jadi kamu menyukai sesuatu, padahal ia buruk bagimu."},
+    {arab:"إِنَّ مَعَ الْعُسْرِ يُسْرًا", ref:"Al-Inshirah/Al-Sharh:6", trans:"Sesungguhnya bersama kesulitan ada kemudahan."},
+    {arab:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا", ref:"Al-Inshirah/Al-Sharh:7", trans:"Maka apabila kamu telah selesai (dari sesuatu urusan), tetaplah berusaha,"},
+    {arab:"وَادْعُوا رَبَّكُمْ تَضَرُّعًا وَخُفْيَةً", ref:"Al-A'raf:55 (potongan)", trans:"Dan berdoalah kepada Tuhanmu dengan rasa takut dan harap yang khusyuk."},
+    {arab:"إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", ref:"Al-Baqarah:153 (potongan)", trans:"Sesungguhnya Allah beserta orang-orang yang sabar."},
+    {arab:"وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ", ref:"Hud:88 (potongan)", trans:"Dan tidaklah taufikku (berjaya) kecuali dengan pertolongan Allah."},
+    {arab:"رَبَّنَا تَقَبَّلْ مِنَّا", ref:"Al-Baqarah:127 (potongan)", trans:"Ya Tuhan kami, terimalah (amal kami) dari kami."},
+    {arab:"إِنَّ اللَّهَ لا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنْفُسِهِمْ", ref:"Ar-Rad:11 (potongan)", trans:"Sesungguhnya Allah tidak akan mengubah keadaan sesuatu kaum sehingga mereka mengubah keadaan diri mereka sendiri."},
+    {arab:"ادْعُونِي أَسْتَجِبْ لَكُمْ", ref:"Ghafir/Mu'min:60 (potongan)", trans:"Berdoalah kepada-Ku, niscaya akan Aku perkenankan (doa)mu."},
+    {arab:"وَالَّذِينَ هُمْ لِفُرُوجِهِمْ حَافِظُونَ", ref:"Al-Mu'minun:5 (potongan)", trans:"Dan mereka yang memelihara kemaluan mereka."}
+  ];
+
+  // DOM elems
+  const arabEl = document.getElementById('ayat-arabic');
+  const trEl = document.getElementById('ayat-trans');
+  const numEl = document.getElementById('ayat-number');
+  const refEl = document.getElementById('ayat-ref');
+  const randomBtn = document.getElementById('randomBtn');
+  const allBtn = document.getElementById('allBtn');
+  const allSection = document.getElementById('all-section');
+
+  let current = -1;
+  function pickRandom(){
+    if(verses.length === 0) return 0;
+    let i;
+    do { i = Math.floor(Math.random() * verses.length); } while(i === current && verses.length > 1);
+    return i;
+  }
+
+  function showVerse(i){
+    if(i < 0 || i >= verses.length) return;
+    current = i;
+    const v = verses[i];
+    // animate simple fade
+    arabEl.style.opacity = 0; trEl.style.opacity = 0;
+    setTimeout(()=>{
+      arabEl.innerHTML = v.arab;
+      trEl.textContent = v.trans;
+      numEl.textContent = `Ayat ${i+1}`;
+      refEl.textContent = v.ref;
+      arabEl.style.opacity = 1; trEl.style.opacity = 1;
+    },160);
+  }
+
+  // initial
+  window.addEventListener('load', ()=>{
+    showVerse(pickRandom());
+    populateAll();
+  });
+
+  randomBtn.addEventListener('click', ()=> showVerse(pickRandom()));
+
+  // toggle all list
+  let visible = false;
+  allBtn.addEventListener('click', ()=>{
+    visible = !visible;
+    allSection.style.display = visible ? 'block' : 'none';
+    allBtn.textContent = visible ? '🔽 Tutup Senarai' : '📚 Lihat Semua';
+    if(visible) allSection.scrollIntoView({behavior:'smooth'});
+  });
+
+  function populateAll(){
+    allSection.innerHTML = '';
+    const grid = document.createElement('div');
+    grid.className = 'all-grid';
+    verses.forEach((v,i)=>{
+      const c = document.createElement('div');
+      c.className = 'minicard';
+      c.innerHTML = `<div class="arab">${v.arab}</div><div class="tr">— ${v.trans}</div><div style="margin-top:8px;font-weight:700;color:#0b5136">#${i+1} • ${v.ref}</div>`;
+      c.addEventListener('click', ()=>{ showVerse(i); window.scrollTo({top:0,behavior:'smooth'}); });
+      grid.appendChild(c);
+    });
+    allSection.appendChild(grid);
+  }
+</script>
+</body>
+</html>

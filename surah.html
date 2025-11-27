@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surah Al-Quran — Ringkasan 114 Surah</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap" rel="stylesheet">
+
+<style>
+/* ======================================= */
+/*            ROOT COLOR PALETTE           */
+/* ======================================= */
+:root{
+  --emerald:#0e8a63;
+  --dark:#0b3a2b;
+  --light:#ecfff7;
+  --gold:#d6b678;
+  --glass:rgba(255,255,255,0.65);
+  --card-border:rgba(0,0,0,0.08);
+  --shadow-soft:0 6px 20px rgba(0,0,0,0.08);
+  --shadow-strong:0 20px 40px rgba(0,0,0,0.18);
+}
+
+/* ======================================= */
+/*                GLOBAL STYLE             */
+/* ======================================= */
+body{
+  margin:0;
+  padding:26px;
+  font-family:'Poppins',sans-serif;
+
+
+  background:
+    linear-gradient(135deg, rgba(14,138,99,0.25), rgba(11,58,43,0.85)),
+    url("https://i.imgur.com/eUO9m8n.png"); 
+  background-size:cover;
+  background-attachment:fixed;
+
+  box-shadow:inset 0 0 120px rgba(255,255,255,0.18);
+
+  color:#0f1d17;
+  animation:fadeIn 1s ease;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:none}
+}
+
+/* GLOW EFFECT */
+.glow{
+  filter:drop-shadow(0 0 6px rgba(14,138,99,0.45));
+}
+
+/* ======================================= */
+/*              HEADER BRANDING            */
+/* ======================================= */
+header{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  background:var(--glass);
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  padding:16px;
+  backdrop-filter:blur(8px);
+  box-shadow:var(--shadow-soft);
+  animation:slideIn 0.8s ease;
+}
+
+@keyframes slideIn{
+  from{opacity:0;transform:translateY(-18px)}
+  to{opacity:1;transform:none}
+}
+
+/* Logo */
+.logo{
+  width:64px;height:64px;
+  display:grid;place-items:center;
+  background:linear-gradient(140deg,var(--emerald),var(--gold));
+  color:white;font-weight:700;font-size:24px;
+  border-radius:16px;
+  box-shadow:0 10px 18px rgba(0,0,0,0.18);
+  transform:rotate(-6deg);
+  transition:0.3s;
+}
+.logo:hover{transform:rotate(4deg) scale(1.05)}
+
+/* ======================================= */
+/*              SEARCH + BUTTON            */
+/* ======================================= */
+.search{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,0.08);
+  background:white;
+  width:260px;
+  transition:0.25s;
+  box-shadow:0 3px 14px rgba(0,0,0,0.06);
+}
+.search:focus{
+  transform:translateY(-3px);
+  box-shadow:0 10px 26px rgba(0,0,0,0.12);
+}
+
+/* Button */
+.home-btn{
+  background:var(--emerald);
+  color:white;
+  padding:12px 16px;
+  border-radius:12px;
+  border:none;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s;
+  box-shadow:0 6px 20px rgba(14,138,99,0.25);
+}
+.home-btn:hover{
+  background:#0c724f;
+  transform:translateY(-3px);
+}
+
+/* ======================================= */
+/*                SURAH CARDS              */
+/* ======================================= */
+.surah-grid{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:16px;
+}
+
+.surah-card{
+  background:var(--glass);
+  border:1px solid var(--card-border);
+  border-radius:18px;
+  padding:16px;
+  backdrop-filter:blur(6px);
+  box-shadow:var(--shadow-soft);
+  transition:0.35s;
+  overflow:hidden;
+  position:relative;
+}
+.surah-card:hover{
+  transform:translateY(-8px);
+  box-shadow:var(--shadow-strong);
+}
+
+/* Islamic glowing border */
+.surah-card::before{
+  content:"";
+  position:absolute;inset:0;
+  border-radius:18px;
+  border:2px solid transparent;
+  background:linear-gradient(140deg,var(--emerald),var(--gold)) border-box;
+  -webkit-mask:
+      linear-gradient(#fff 0 0) padding-box,
+      linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:0;
+  transition:0.4s;
+}
+.surah-card:hover::before{opacity:1}
+
+/* ======================================= */
+/*         SURAH CONTENT EXPANDER          */
+/* ======================================= */
+.surah-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.45s ease,padding 0.3s;
+  font-size:13px;
+  line-height:1.4;
+}
+.surah-content.open{
+  max-height:460px;
+  padding-top:10px;
+}
+
+/* Title Arabic */
+.arabic{
+  font-family:'Scheherazade New',serif;
+  font-size:22px;
+  color:var(--emerald);
+}
+
+/* Chips */
+.chip{
+  display:inline-block;
+  padding:6px 8px;
+  border-radius:999px;
+  background:rgba(14,138,99,0.12);
+  color:var(--dark);
+  font-size:11px;
+  margin-right:4px;
+}
+
+/* Floating particles */
+.particles{
+  position:fixed;
+  right:20px;bottom:20px;
+  width:160px;height:160px;
+  background:
+    radial-gradient(circle at 30% 30%,rgba(14,138,99,0.1),transparent 18%),
+    radial-gradient(circle at 70% 70%,rgba(214,182,120,0.12),transparent 18%);
+  border-radius:50%;
+  filter:blur(8px);
+  pointer-events:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="particles"></div>
+
+<header>
+  <div class="logo glow">س</div>
+  <div>
+    <h1>Surah Al-Quran</h1>
+    <p>Ringkasan lengkap 114 surah – Maksud • Tema • Asbab Nuzul • Pengajaran</p>
+  </div>
+  <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+    <input id="search" class="search" placeholder="Cari surah..." />
+    <a class="home-btn" href="index.html">🏠 Utama</a>
+  </div>
+</header>
+
+<main>
+  <div id="grid" class="surah-grid"></div>
+</main>
+
+<footer style="margin-top:20px;font-size:13px;color:#355244;">
+  Gunakan sebagai rujukan ringkas. Untuk tafsir terperinci, rujuk kitab tafsir muktabar.
+</footer>
+
+<script>
+
+
+  const surahList = [
+{arabic:"الفاتحة", translit:"Al-Fatihah", meaning:"Pembukaan", asbab:"Doa pembukaan; pujian & permohonan petunjuk.", place:"Makkah", ayat:7, theme:"Doa, petunjuk", keyPoints:"Pujian kepada Allah; permintaan petunjuk; permulaan ibadah.", lessons:"Mulakan ibadah & urusan dgn memohon petunjuk."},
+{arabic:"البقرة", translit:"Al-Baqarah", meaning:"Lembu Betina", asbab:"Panduan hukum & kehidupan selepas hijrah.", place:"Madinah", ayat:286, theme:"Hukum, kisah", keyPoints:"Hukum ibadah & muamalat; kisah Bani Israel.", lessons:"Ketaatan pada hukum & belajar dari sejarah."},
+{arabic:"آل عمران", translit:"Ali 'Imran", meaning:"Keluarga Imran", asbab:"Penguatan iman & persaudaraan.", place:"Madinah", ayat:200, theme:"Iman, ukhuwah", keyPoints:"Peristiwa Uhud; peringatan kekuatan umat.", lessons:"Bersatu & kukuhkan iman."},
+{arabic:"النساء", translit:"An-Nisa'", meaning:"Wanita", asbab:"Hukum keluarga & hak wanita.", place:"Madinah", ayat:176, theme:"Keluarga, hukum", keyPoints:"Hak wanita, warisan, perkahwinan.", lessons:"Keadilan & perlindungan hak keluarga."},
+{arabic:"المائدة", translit:"Al-Ma'idah", meaning:"Jamuan", asbab:"Hukum makanan, perjanjian & etika.", place:"Madinah", ayat:120, theme:"Hukum, etika", keyPoints:"Halal/haram, janji Tuhan.", lessons:"Patuh pada peraturan Tuhan dalam sosial."},
+{arabic:"الأنعام", translit:"Al-An'am", meaning:"Binatang Ternak", asbab:"Menegaskan tauhid & tanda kekuasaan Allah.", place:"Makkah", ayat:165, theme:"Tauhid, akidah", keyPoints:"Hujah terhadap syirik; bukti melalui ciptaan.", lessons:"Renungkan ciptaan & kukuhkan tauhid."},
+{arabic:"الأعراف", translit:"Al-A'raf", meaning:"Tembok", asbab:"Kisah umat terdahulu; peringatan.", place:"Makkah", ayat:206, theme:"Kisah, peringatan", keyPoints:"Iktibar dari kisah nabi-nabi.", lessons:"Ambil pengajaran dari sejarah umat."},
+{arabic:"الأنفال", translit:"Al-Anfal", meaning:"Rampasan Perang", asbab:"Hukum berkaitan perang & pembahagian harta.", place:"Madinah", ayat:75, theme:"Perang, etika", keyPoints:"Perang Badar; etika perang.", lessons:"Keadilan ketika konflik."},
+{arabic:"التوبة", translit:"At-Tawbah", meaning:"Taubat", asbab:"Arah hukum & teguran terhadap munafik.", place:"Madinah", ayat:129, theme:"Taubat, hukum", keyPoints:"Arahan jihad, peringatan.", lessons:"Sentiasa bertaubat & pegang akhlak."},
+{arabic:"يونس", translit:"Yunus", meaning:"Nabi Yunus", asbab:"Peringatan about rahmat & siksa; kisah Yunus.", place:"Makkah", ayat:109, theme:"Kisah nabi", keyPoints:"Kesabaran & doa.", lessons:"Percaya pada pertolongan Allah."},
+{arabic:"هود", translit:"Hud", meaning:"Nabi Hud", asbab:"Kisah & peringatan.", place:"Makkah", ayat:123, theme:"Kisah, amaran", keyPoints:"Akibat keengkaran.", lessons:"Ikut petunjuk nabi & jangan sombong."},
+{arabic:"يوسف", translit:"Yusuf", meaning:"Nabi Yusuf", asbab:"Kisah penuh hikmah tentang ujian.", place:"Makkah", ayat:111, theme:"Kesabaran, hikmah", keyPoints:"Fitnah, kasih sayang & hikmah akhir.", lessons:"Sabar & percaya rancangan Allah."},
+{arabic:"الرعد", translit:"Ar-Ra'd", meaning:"Guruh", asbab:"Tanda kekuasaan Allah melalui alam.", place:"Makkah", ayat:43, theme:"Tanda alam", keyPoints:"Bukti kebesaran Allah di alam.", lessons:"Renungkan tanda-tanda Allah."},
+{arabic:"ابراهيم", translit:"Ibrahim", meaning:"Nabi Ibrahim", asbab:"Doa & teladan tauhid.", place:"Makkah", ayat:52, theme:"Doa, ketabahan", keyPoints:"Doa Nabi Ibrahim; tawakkal.", lessons:"Banyak berdoa & bertawakkal."},
+{arabic:"الحجر", translit:"Al-Hijr", meaning:"Bukit Al-Hijr", asbab:"Peringatan tentang azab kaum ingkar.", place:"Makkah", ayat:99, theme:"Peringatan, azab", keyPoints:"Azab dan pengajaran.", lessons:"Jangan ingkar risalah."},
+{arabic:"النحل", translit:"An-Nahl", meaning:"Lebah", asbab:"Nikmat Allah & bukti ciptaan.", place:"Makkah", ayat:128, theme:"Nikmat, akidah", keyPoints:"Rezeki & hikmah ciptaan.", lessons:"Syukur & guna nikmat utk kebaikan."},
+{arabic:"الإسراء", translit:"Al-Isra'", meaning:"Perjalanan Malam", asbab:"Isra' & peringatan moral.", place:"Makkah", ayat:111, theme:"Mi'raj, akhlak", keyPoints:"Perintah moral & mukjizat.", lessons:"Hargai mukjizat & akhlak."},
+{arabic:"الكهف", translit:"Al-Kahf", meaning:"Gua", asbab:"Kisah Ashabul Kahfi; ujian iman.", place:"Makkah", ayat:110, theme:"Iman, ujian", keyPoints:"Pemuda beriman & pelajaran zaman.", lessons:"Pegang teguh iman saat diuji."},
+{arabic:"مريم", translit:"Maryam", meaning:"Maryam", asbab:"Kisah Maryam & mukjizat Isa.", place:"Makkah", ayat:98, theme:"Kisah nabi, mukjizat", keyPoints:"Kelahiran Isa & pujian Allah.", lessons:"Beriman pada mukjizat."},
+{arabic:"طه", translit:"Taha", meaning:"Taha (Musa)", asbab:"Pengajaran & galakan kepada Nabi.", place:"Makkah", ayat:135, theme:"Dakwah, ketabahan", keyPoints:"Perintah & penghiburan.", lessons:"Jangan putus asa dalam dakwah."},
+{arabic:"الأنبياء", translit:"Al-Anbiya'", meaning:"Para Nabi", asbab:"Kisah banyak nabi; teladan.", place:"Makkah", ayat:112, theme:"Kisah nabi", keyPoints:"Kesamaan mesej para nabi.", lessons:"Belajar dari teladan para nabi."},
+{arabic:"الحج", translit:"Al-Hajj", meaning:"Haji", asbab:"Hukum & hikmah ibadah haji.", place:"Madinah", ayat:78, theme:"Ibadah, pengorbanan", keyPoints:"Rukun haji & tanda kepatuhan.", lessons:"Hargai hikmah haji."},
+{arabic:"المؤمنون", translit:"Al-Mu'minun", meaning:"Orang Mukmin", asbab:"Sifat mukmin & ganjaran.", place:"Makkah", ayat:118, theme:"Akhlak", keyPoints:"Ciri mukmin; ganjaran akhirat.", lessons:"Amalkan akhlak terpuji."},
+{arabic:"النور", translit:"An-Nur", meaning:"Cahaya", asbab:"Hukum adab & sosial.", place:"Madinah", ayat:64, theme:"Adab sosial", keyPoints:"Hukum khalwat & adab.", lessons:"Jaga adab & keharmonian."},
+{arabic:"الفرقان", translit:"Al-Furqan", meaning:"Pembeda", asbab:"Membezakan hak & batil.", place:"Makkah", ayat:77, theme:"Petunjuk", keyPoints:"Bukti kenabian & petunjuk.", lessons:"Teguh pada kebenaran."},
+{arabic:"الشعراء", translit:"Asy-Syu'ara'", meaning:"Para Penyair", asbab:"Kisah penentang & peringatan.", place:"Makkah", ayat:227, theme:"Dakwah", keyPoints:"Reaksi kaum kafir.", lessons:"Sabar bila ditentang."},
+{arabic:"النمل", translit:"An-Naml", meaning:"Semut", asbab:"Kisah Sulaiman & hikmah ciptaan.", place:"Makkah", ayat:93, theme:"Hikmah", keyPoints:"Kepintaran Sulaiman; tanda Allah.", lessons:"Guna ilmu utk manfaat."},
+{arabic:"القصص", translit:"Al-Qasas", meaning:"Kisah", asbab:"Kisah Musa dan pengajaran.", place:"Makkah", ayat:88, theme:"Kisah nabi", keyPoints:"Perjalanan Musa; pengajaran sabar.", lessons:"Percaya pada penjagaan Allah."},
+{arabic:"العنكبوت", translit:"Al-Ankabut", meaning:"Labah-labah", asbab:"Ujian iman & ketabahan.", place:"Makkah", ayat:69, theme:"Ujian iman", keyPoints:"Ujian & kekuatan iman.", lessons:"Tabah hadapi dugaan."},
+{arabic:"الروم", translit:"Ar-Rum", meaning:"Bangsa Rom", asbab:"Tanda & janji Allah.", place:"Makkah", ayat:60, theme:"Sejarah, iman", keyPoints:"Peristiwa Rom-Persia; janji Tuhan.", lessons:"Percaya janji Allah."},
+{arabic:"لقمان", translit:"Luqman", meaning:"Luqman", asbab:"Nasihat kebijaksanaan.", place:"Makkah", ayat:34, theme:"Hikmah", keyPoints:"Nasihat Luqman utk anak.", lessons:"Didik dgn akhlak."},
+{arabic:"السجدة", translit:"As-Sajdah", meaning:"Sujud", asbab:"Pengajaran tentang keimanan.", place:"Makkah", ayat:30, theme:"Sujud, iman", keyPoints:"Sujud tanda taat.", lessons:"Utamakan ketaatan."},
+{arabic:"الأحزاب", translit:"Al-Ahzab", meaning:"Golongan Bersekutu", asbab:"Peperangan & akhlak keluarga nabi.", place:"Madinah", ayat:73, theme:"Perang, keluarga", keyPoints:"Peristiwa Khandaq; etika.", lessons:"Ikut petunjuk sosial & konflik."},
+{arabic:"سبأ", translit:"Saba'", meaning:"Saba'", asbab:"Kisah & nikmat Allah.", place:"Makkah", ayat:54, theme:"Nikmat, amaran", keyPoints:"Akibat kufur nikmat.", lessons:"Syukur & tawaduk."},
+{arabic:"فاطر", translit:"Fathir", meaning:"Pencipta", asbab:"Renungan pada Pencipta.", place:"Makkah", ayat:45, theme:"Kekuasaan Ilahi", keyPoints:"Tanda ciptaan; bukti Tuhan.", lessons:"Tunduk pada pencipta."},
+{arabic:"يس", translit:"Ya-Sin", meaning:"Ya-Sin", asbab:"Menguatkan pentingnya al-Quran.", place:"Makkah", ayat:83, theme:"Petunjuk", keyPoints:"Peringatan hari akhir.", lessons:"Ambil iktibar dari Quran."},
+{arabic:"الصافات", translit:"As-Saffat", meaning:"Barisan", asbab:"Kisah para nabi; pengajaran.", place:"Makkah", ayat:182, theme:"Kisah nabi", keyPoints:"Perintah & peringatan.", lessons:"Teguh pada iman."},
+{arabic:"ص", translit:"Sad", meaning:"Sad (huruf)", asbab:"Kisah Daud & Sulaiman.", place:"Makkah", ayat:88, theme:"Kisah nabi", keyPoints:"Kepimpinan & hikmah.", lessons:"Adil & berilmu."},
+{arabic:"الزمر", translit:"Az-Zumar", meaning:"Orang-Orang Berkelompok", asbab:"Tauhid & amalan", place:"Makkah", ayat:75, theme:"Iman, amal", keyPoints:"Pembahagian manusia mengikut amal.", lessons:"Perbanyak amal soleh."},
+{arabic:"غافر", translit:"Ghafir", meaning:"Maha Pengampun", asbab:"Rahmat & pengampunan Allah.", place:"Makkah", ayat:85, theme:"Pengampunan", keyPoints:"Kasih Allah kpd bertaubat.", lessons:"Jangan putus asa dari rahmat."},
+{arabic:"فصلت", translit:"Fussilat", meaning:"Yang Dijelaskan", asbab:"Penjelasan kekuasaan Allah.", place:"Makkah", ayat:54, theme:"Wahyu", keyPoints:"Ayat-ayat yg jelas.", lessons:"Pelajari ayat dgn kefahaman."},
+{arabic:"الشورى", translit:"Ash-Shura", meaning:"Musyawarah", asbab:"Perlunya bermusyawarah.", place:"Makkah", ayat:53, theme:"Musyawarah", keyPoints:"Perundingan utk kebaikan.", lessons:"Amalkan musyawarah."},
+{arabic:"الزخرف", translit:"Az-Zukhruf", meaning:"Perhiasan", asbab:"Peringatan cinta dunia.", place:"Makkah", ayat:89, theme:"Dunia vs akhirat", keyPoints:"Bahaya cinta dunia.", lessons:"Utamakan akhirat."},
+{arabic:"الدخان", translit:"Ad-Dukhan", meaning:"Asap", asbab:"Amaran hari akhir.", place:"Makkah", ayat:59, theme:"Azab, amaran", keyPoints:"Amaran azab.", lessons:"Perbaiki diri."},
+{arabic:"الجاثية", translit:"Al-Jathiyah", meaning:"Berlutut", asbab:"Peringatan tentang kiamat.", place:"Makkah", ayat:37, theme:"Kiamat", keyPoints:"Hari pembalasan.", lessons:"Sediakan amal."},
+{arabic:"محمد", translit:"Muhammad", meaning:"Muhammad", asbab:"Perjuangan & ganjaran.", place:"Madinah", ayat:38, theme:"Perjuangan", keyPoints:"Jihad & ganjaran.", lessons:"Teguh dlm dakwah."},
+{arabic:"الفتح", translit:"Al-Fath", meaning:"Kemenangan", asbab:"Hudaibiyah & kemenangan moral.", place:"Madinah", ayat:29, theme:"Kemenangan", keyPoints:"Kebijaksanaan & kemenangan.", lessons:"Sabar membawa kemenangan."},
+{arabic:"الحجرات", translit:"Al-Hujurat", meaning:"Bilik-Bilik", asbab:"Adab sosial & peraturan.", place:"Madinah", ayat:18, theme:"Adab", keyPoints:"Adab bertemu; larangan fitnah.", lessons:"Jaga kehormatan masyarakat."},
+{arabic:"ق", translit:"Qaf", meaning:"Qaf (huruf)", asbab:"Peringatan kebangkitan.", place:"Makkah", ayat:45, theme:"Kiamat", keyPoints:"Hari kebangkitan.", lessons:"Bersedia utk akhirat."},
+{arabic:"الذاريات", translit:"Adh-Dhariyat", meaning:"Angin yang Menerbangkan", asbab:"Tanda alam & kebesaran Tuhan.", place:"Makkah", ayat:60, theme:"Tanda alam", keyPoints:"Ciptaan Tuhan sbg tanda.", lessons:"Renungkan alam."},
+{arabic:"الطور", translit:"At-Tur", meaning:"Bukit", asbab:"Peringatan tentang azab & akhirat.", place:"Makkah", ayat:49, theme:"Kiamat", keyPoints:"Amaran utk ingkar.", lessons:"Ingati akhirat."},
+{arabic:"النجم", translit:"An-Najm", meaning:"Bintang", asbab:"Wahyu & pengalaman nabi.", place:"Makkah", ayat:62, theme:"Wahyu", keyPoints:"Mi'raj & wahyu.", lessons:"Hargai wahyu."},
+{arabic:"القمر", translit:"Al-Qamar", meaning:"Bulan", asbab:"Peringatan utk umat terdahulu.", place:"Makkah", ayat:55, theme:"Kisah umat", keyPoints:"Mukjizat & azab.", lessons:"Ambil iktibar."},
+{arabic:"الرحمن", translit:"Ar-Rahman", meaning:"Maha Pemurah", asbab:"Menunjukkan banyak nikmat Allah.", place:"Madinah", ayat:78, theme:"Nikmat", keyPoints:"Ayat ulang 'فبأي آلاء ربكما تكذّبان'.", lessons:"Syukuri nikmat."},
+{arabic:"الواقعة", translit:"Al-Waqi'ah", meaning:"Peristiwa", asbab:"Gambaran hari kiamat.", place:"Makkah", ayat:96, theme:"Kiamat", keyPoints:"Pembahagian manusia pada akhirat.", lessons:"Beramal ikhlas."},
+{arabic:"الحديد", translit:"Al-Hadid", meaning:"Besi", asbab:"Pengajaran infak & kekuatan iman.", place:"Madinah", ayat:29, theme:"Infak", keyPoints:"Kepentingan sedekah.", lessons:"Sumbang utk masyarakat."},
+{arabic:"المجادلة", translit:"Al-Mujadilah", meaning:"Perempuan yg Membantah", asbab:"Isu sosial & aduan wanita.", place:"Madinah", ayat:22, theme:"Hukum sosial", keyPoints:"Keadilan utk wanita.", lessons:"Layan aduan dgn adil."},
+{arabic:"الحشر", translit:"Al-Hashr", meaning:"Pengusiran", asbab:"Pengusiran Bani Nadhir; pengajaran.", place:"Madinah", ayat:24, theme:"Sejarah", keyPoints:"Pengajaran dari pengusiran.", lessons:"Belajar disiplin & keadilan."},
+{arabic:"الممتحنة", translit:"Al-Mumtahanah", meaning:"Wanita yang Diuji", asbab:"Peraturan pergaulan", place:"Madinah", ayat:13, theme:"Ujian sosial", keyPoints:"Panduan pergaulan dgn bukan Muslim.", lessons:"Bijak dalam hubungan sosial."},
+{arabic:"الصّف", translit:"As-Saff", meaning:"Barisan", asbab:"Persatuan & jihad", place:"Madinah", ayat:14, theme:"Persatuan", keyPoints:"Perintah berjemaah.", lessons:"Bersatu dalam kebaikan."},
+{arabic:"الجمعة", translit:"Al-Jumu'ah", meaning:"Jumaat", asbab:"Hukum solat Jumaat", place:"Madinah", ayat:11, theme:"Ibadah", keyPoints:"Khutbah & solat berjemaah.", lessons:"Hargai majlis ilmu."},
+{arabic:"المنافقون", translit:"Al-Munafiqun", meaning:"Munafik", asbab:"Peringatan sifat munafik", place:"Madinah", ayat:11, theme:"Munafik", keyPoints:"Ciri munafik.", lessons:"Hindari sifat munafik."},
+{arabic:"التغابن", translit:"At-Taghabun", meaning:"Hari Kegagalan", asbab:"Peringatan tipu daya dunia", place:"Madinah", ayat:18, theme:"Akhirat vs dunia", keyPoints:"Kesedaran akhirat.", lessons:"Utamakan akhirat."},
+{arabic:"الطلاق", translit:"At-Talaq", meaning:"Talak", asbab:"Hukum perceraian", place:"Madinah", ayat:12, theme:"Keluarga", keyPoints:"Panduan talak & tanggungjawab.", lessons:"Amal keadilan dlm keluarga."},
+{arabic:"التحريم", translit:"At-Tahrim", meaning:"Pengharaman", asbab:"Nasihat keluarga nabi", place:"Madinah", ayat:12, theme:"Etika keluarga", keyPoints:"Pengajaran etika.", lessons:"Jaga etika keluarga."},
+{arabic:"الملك", translit:"Al-Mulk", meaning:"Kerajaan", asbab:"Renungan tentang kuasa Allah", place:"Makkah", ayat:30, theme:"Akhirat", keyPoints:"Tanda kebesaran Allah.", lessons:"Ingat akhirat."},
+{arabic:"القلم", translit:"Al-Qalam", meaning:"Pena", asbab:"Pentingnya ilmu & akhlak", place:"Makkah", ayat:52, theme:"Ilmu", keyPoints:"Nilai ilmu & sabar.", lessons:"Utamakan ilmu."},
+{arabic:"الحاقة", translit:"Al-Haqqah", meaning:"Hari Kebenaran", asbab:"Penggambaran hari kiamat", place:"Makkah", ayat:52, theme:"Kiamat", keyPoints:"Hari pembalasan.", lessons:"Sediakan amal."},
+{arabic:"المعارج", translit:"Al-Ma'arij", meaning:"Jalan Naik", asbab:"Kesabaran & ganjaran", place:"Makkah", ayat:44, theme:"Kesabaran", keyPoints:"Ciri orang beriman.", lessons:"Sabar & istiqamah."},
+{arabic:"نوح", translit:"Nuh", meaning:"Nabi Nuh", asbab:"Dakwah & azab kaum", place:"Makkah", ayat:28, theme:"Dakwah", keyPoints:"Kesabaran nabi.", lessons:"Terus berdakwah."},
+{arabic:"الجن", translit:"Al-Jinn", meaning:"Jin", asbab:"Pertemuan jin & keimanan mereka", place:"Makkah", ayat:28, theme:"Jin", keyPoints:"Kewujudan jin yg beriman.", lessons:"Ingat makhluk lain juga diuji."},
+{arabic:"المزّمّل", translit:"Al-Muzzammil", meaning:"Yang Berselimut", asbab:"Galakan solat malam", place:"Makkah", ayat:20, theme:"Ibadah malam", keyPoints:"Solat malam utk nabi.", lessons:"Amalkan bila mampu."},
+{arabic:"المدّثر", translit:"Al-Muddathir", meaning:"Yang Berselimut", asbab:"Permulaan dakwah", place:"Makkah", ayat:56, theme:"Dakwah", keyPoints:"Arahan utk sampaikan wahyu.", lessons:"Berani melaksanakan tugas."},
+{arabic:"القيامة", translit:"Al-Qiyamah", meaning:"Hari Kiamat", asbab:"Penggambaran kebangkitan", place:"Makkah", ayat:40, theme:"Kiamat", keyPoints:"Perincian kebangkitan.", lessons:"Sediakan amal."},
+{arabic:"الانسان", translit:"Al-Insan", meaning:"Manusia", asbab:"Peringatan penciptaan & ujian", place:"Madinah", ayat:31, theme:"Ujian", keyPoints:"Perumpamaan ujian.", lessons:"Hidup utk ujian."},
+{arabic:"المرسلات", translit:"Al-Mursalat", meaning:"Yang Diutus", asbab:"Tanda hari akhir", place:"Makkah", ayat:50, theme:"Kiamat", keyPoints:"Kepentingan ingat akhirat.", lessons:"Jangan leka."},
+{arabic:"النبأ", translit:"An-Naba'", meaning:"Berita Besar", asbab:"Peringatan hari akhir", place:"Makkah", ayat:40, theme:"Kiamat", keyPoints:"Gambaran pembalasan.", lessons:"Beramal."},
+{arabic:"النازعات", translit:"An-Nazi'at", meaning:"Malaikat Mencabut Nyawa", asbab:"Kebangkitan & ajal", place:"Makkah", ayat:46, theme:"Kematian", keyPoints:"Proses kematian.", lessons:"Ingat ajal."},
+{arabic:"عبس", translit:"Abasa", meaning:"Dia Bermuka Masam", asbab:"Pengajaran adab dakwah", place:"Makkah", ayat:42, theme:"Dakwah", keyPoints:"Teguran kpd nabi.", lessons:"Sampaikan dgn hikmah."},
+{arabic:"التكوير", translit:"At-Takwir", meaning:"Bergulung", asbab:"Tanda kiamat", place:"Makkah", ayat:29, theme:"Kiamat", keyPoints:"Tanda kiamat.", lessons:"Bersedia."},
+{arabic:"الانفطار", translit:"Al-Infitar", meaning:"Terbelah", asbab:"Catatan amalan", place:"Makkah", ayat:19, theme:"Kiamat", keyPoints:"Catatan amal.", lessons:"Hidup dgn kesedaran."},
+{arabic:"المطففين", translit:"Al-Mutaffifin", meaning:"Penipu Timbangan", asbab:"Amaran keadilan", place:"Makkah", ayat:36, theme:"Keadilan", keyPoints:"Larangan menipu.", lessons:"Jujur."},
+{arabic:"الانشقاق", translit:"Al-Inshiqaq", meaning:"Terbelah", asbab:"Kiamat", place:"Makkah", ayat:25, theme:"Kiamat", keyPoints:"Alam terbelah.", lessons:"Sediakan amal."},
+{arabic:"البروج", translit:"Al-Buruj", meaning:"Gugusan Bintang", asbab:"Amaran kpd zalim", place:"Makkah", ayat:22, theme:"Ujian iman", keyPoints:"Kesetiaan mukmin.", lessons:"Teguh walau dianiaya."},
+{arabic:"الطارق", translit:"At-Tariq", meaning:"Yang Datang di Malam", asbab:"Ilmu & asal kejadian", place:"Makkah", ayat:17, theme:"Ilmu", keyPoints:"Asal kejadian manusia.", lessons:"Renungkan asal-usul."},
+{arabic:"الأعلى", translit:"Al-A'la", meaning:"Yang Maha Tinggi", asbab:"Penghiburan wahyu", place:"Makkah", ayat:19, theme:"Wahyu", keyPoints:"Wahyu sebagai penyembuh.", lessons:"Teguhkan hati dgn wahyu."},
+{arabic:"الغاشية", translit:"Al-Ghashiyah", meaning:"Yang Menutupi", asbab:"Balasan baik & buruk", place:"Makkah", ayat:26, theme:"Akhirat", keyPoints:"Perbezaan balasan.", lessons:"Usahakan ganjaran akhirat."},
+{arabic:"الفجر", translit:"Al-Fajr", meaning:"Fajar", asbab:"Kisah umat terdahulu", place:"Makkah", ayat:30, theme:"Sejarah", keyPoints:"Kisah 'Ad, Thamud.", lessons:"Belajar dari sejarah."},
+{arabic:"البلد", translit:"Al-Balad", meaning:"Kota", asbab:"Ujian hidup", place:"Makkah", ayat:20, theme:"Ujian", keyPoints:"Iman dlm kesusahan.", lessons:"Bantu yg memerlukan."},
+{arabic:"الشمس", translit:"Ash-Shams", meaning:"Matahari", asbab:"Jiwa bersih vs terkorupsi", place:"Makkah", ayat:15, theme:"Jiwa", keyPoints:"Pembersihan jiwa.", lessons:"Bersihkan hati."},
+{arabic:"الليل", translit:"Al-Lail", meaning:"Malam", asbab:"Kebaikan & usaha", place:"Makkah", ayat:21, theme:"Amal", keyPoints:"Perbezaan manusia.", lessons:"Berusaha utk baik."},
+{arabic:"الضحى", translit:"Ad-Dhuha", meaning:"Waktu Dhuha", asbab:"Penghiburan utk nabi", place:"Makkah", ayat:11, theme:"Penghiburan", keyPoints:"Doa & peringatan.", lessons:"Yakin pada nikmat Allah."},
+{arabic:"الشرح", translit:"Ash-Sharh", meaning:"Melapangkan", asbab:"Kemudahan selepas kesusahan", place:"Makkah", ayat:8, theme:"Penghiburan", keyPoints:"Keringanan setelah kesukaran.", lessons:"Jangan berputus asa."},
+{arabic:"التين", translit:"At-Tin", meaning:"Buah Tin", asbab:"Keadilan Allah", place:"Makkah", ayat:8, theme:"Keadilan", keyPoints:"Pengajaran moral.", lessons:"Amal kebajikan."},
+{arabic:"العلق", translit:"Al-Alaq", meaning:"Segumpal (Permulaan Wahyu)", asbab:"Permulaan wahyu di Gua Hira", place:"Makkah", ayat:19, theme:"Permulaan wahyu", keyPoints:"Perintah membaca.", lessons:"Pentingnya ilmu & membaca."},
+{arabic:"القدر", translit:"Al-Qadr", meaning:"Kemuliaan / Malam Lailatul Qadr", asbab:"Menegaskan malam penuh berkat", place:"Makkah", ayat:5, theme:"Keistimewaan malam", keyPoints:"Nilai malam Lailatul Qadr.", lessons:"Cari malam berkat."},
+{arabic:"البينة", translit:"Al-Bayyinah", meaning:"Bukti yang jelas", asbab:"Menjelaskan kebenaran risalah", place:"Madinah", ayat:8, theme:"Bukti & iman", keyPoints:"Perbezaan mukmin & kufur.", lessons:"Teguh pada kebenaran."},
+{arabic:"الزلزلة", translit:"Az-Zalzalah", meaning:"Guncangan", asbab:"Gambaran hari akhir", place:"Madinah", ayat:8, theme:"Kiamat", keyPoints:"Goncangan hari akhir.", lessons:"Sediakan amal."},
+{arabic:"العاديات", translit:"Al-Adiyat", meaning:"Kuda berlari", asbab:"Amaran tentang sifat manusia", place:"Makkah", ayat:11, theme:"Kecenderungan manusia", keyPoints:"Sifat sombong manusia.", lessons:"Tunduk pada kebenaran."},
+{arabic:"القارعة", translit:"Al-Qari'ah", meaning:"Hari Kiamat", asbab:"Gambaran hari berat ringan amal", place:"Makkah", ayat:11, theme:"Pembalasan", keyPoints:"Berat ringan amalan.", lessons:"Amal utk akhirat."},
+{arabic:"التكاثر", translit:"At-Takathur", meaning:"Bermegah-megah", asbab:"Peringatan cinta dunia", place:"Makkah", ayat:8, theme:"Dunia vs akhirat", keyPoints:"Kerja utk akhirat.", lessons:"Jangan leka dgn dunia."},
+{arabic:"العصر", translit:"Al-Asr", meaning:"Masa", asbab:"Pentingnya masa & amal", place:"Makkah", ayat:3, theme:"Masa & amal", keyPoints:"Iman + amal + kebenaran.", lessons:"Manfaatkan masa."},
+{arabic:"الهمزة", translit:"Al-Humazah", meaning:"Pengumpat", asbab:"Amaran terhadap fitnah & menumpuk harta", place:"Makkah", ayat:9, theme:"Akhlak", keyPoints:"Jangan mengumpat & menumpuk.", lessons:"Jaga lidah & harta."},
+{arabic:"الفيل", translit:"Al-Fil", meaning:"Gajah", asbab:"Kisah Abrahah & bala tentera", place:"Makkah", ayat:5, theme:"Bukti perlindungan Tuhan", keyPoints:"Kuasa Allah menjaga Kaabah.", lessons:"Percaya pada perlindungan Allah."},
+{arabic:"قريش", translit:"Quraysh", meaning:"Kabilah Quraisy", asbab:"Kepentingan syukur atas rezeki", place:"Makkah", ayat:4, theme:"Syukur", keyPoints:"Nikmat keamanan & rezeki.", lessons:"Syukur atas nikmat."},
+{arabic:"الماعون", translit:"Al-Ma'un", meaning:"Bantuan kecil", asbab:"Peringatan tentang mengabaikan amal kecil", place:"Makkah", ayat:7, theme:"Amal sosial", keyPoints:"Peduli pada orang lain.", lessons:"Jadilah murah hati."},
+{arabic:"الكوثر", translit:"Al-Kawthar", meaning:"Nikmat banyak", asbab:"Penghiburan utk nabi", place:"Makkah", ayat:3, theme:"Nikmat", keyPoints:"Kurnia berlimpah.", lessons:"Syukuri kurnia."},
+{arabic:"الكافرون", translit:"Al-Kafirun", meaning:"Orang Kafir", asbab:"Pemisahan antara iman & kekufuran", place:"Makkah", ayat:6, theme:"Tauhid", keyPoints:"Penegasan tauhid.", lessons:"Kukuhkan akidah."},
+{arabic:"النصر", translit:"An-Nasr", meaning:"Pertolongan", asbab:"Tanda kemenangan dakwah", place:"Madinah", ayat:3, theme:"Kemenangan", keyPoints:"Pertolongan & pujian.", lessons:"Syukur ketika diberi kemenangan."},
+{arabic:"المسد", translit:"Al-Masad", meaning:"Tali Berapi (Lahab)", asbab:"Kecaman kepada Abu Lahab", place:"Makkah", ayat:5, theme:"Balasan", keyPoints:"Azab bagi penentang risalah.", lessons:"Hindari permusuhan terhadap kebenaran."},
+{arabic:"الإخلاص", translit:"Al-Ikhlas", meaning:"Keikhlasan", asbab:"Menegaskan tauhid", place:"Makkah", ayat:4, theme:"Tauhid", keyPoints:"Keesaan Allah.", lessons:"Ikhlas dalam ibadah."},
+{arabic:"الفلق", translit:"Al-Falaq", meaning:"Fajar", asbab:"Doa perlindungan", place:"Makkah", ayat:5, theme:"Perlindungan", keyPoints:"Minta perlindungan dari kejahatan.", lessons:"Berdoa utk lindungan."},
+{arabic:"الناس", translit:"An-Nas", meaning:"Manusia", asbab:"Doa memohon perlindungan dari godaan syaitan", place:"Makkah", ayat:6, theme:"Perlindungan", keyPoints:"Lindungan dr syaitan.", lessons:"Sentiasa berlindung pada Allah."}
+    ];
+
+
+
+const grid = document.getElementById("grid");
+
+function render(){
+  grid.innerHTML = "";
+  surahList.forEach((s,i)=>{
+    const card = document.createElement("div");
+    card.className = "surah-card";
+
+    card.innerHTML = `
+      <div class="surah-top">
+        <div class="surah-title">
+          <div class="arabic">${s.arabic}</div>
+          <div class="meta">
+            <div class="trans">${s.translit}</div>
+            <div class="small">${s.meaning}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="surah-content">
+        <span class="chip">Asbab: ${s.asbab}</span>
+        <span class="chip">Tempat: ${s.place}</span>
+        <span class="chip">Ayat: ${s.ayat}</span>
+        <p><b>Tema:</b> ${s.theme}</p>
+        <p><b>Poin Utama:</b> ${s.keyPoints}</p>
+        <p><b>Pengajaran:</b> ${s.lessons}</p>
+      </div>
+    `;
+
+    card.addEventListener("click",()=>{
+      const c = card.querySelector(".surah-content");
+      c.classList.toggle("open");
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+render();
+
+
+document.getElementById("search").addEventListener("input", e=>{
+  const q = e.target.value.toLowerCase();
+  const cards = Array.from(grid.children);
+  cards.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(q) ? "" : "none";
+  });
+});
+</script>
+
+</body>
+</html>

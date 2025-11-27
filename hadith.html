@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hadis Harian — Rawak & Menyentuh Hati</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#e9fbf0;
+      --bg2:#f8f7ee;
+      --card:#ffffff;
+      --text:#053827;
+      --muted:#176b4a;
+      --accent:#d4af37;
+      --glass: rgba(255,255,255,0.7);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+      align-items:center;
+      background-image: url('image/1.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fffbe9;
+      text-align: center;
+    }
+
+    header{
+      width:100%;
+      max-width:1000px;
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+      z-index:2;
+    }
+    h1{
+      margin:0;
+      font-size:1.9rem;
+      color:var(--muted);
+      letter-spacing:0.2px;
+    }
+    .sub{
+      margin-left:auto;
+      font-size:0.95rem;
+      color:#0b4f3a;
+      opacity:0.9;
+    }
+
+    .container{
+      width:100%;
+      max-width:900px;
+      position:relative;
+    }
+
+    /* particle-like soft glow (decorative) */
+    .glow {
+      pointer-events:none;
+      position:absolute;
+      inset: -10% -10% auto auto;
+      width:420px;
+      height:420px;
+      background: radial-gradient(circle at 20% 20%, rgba(212,175,55,0.12), transparent 12%),
+                  radial-gradient(circle at 80% 80%, rgba(11,107,74,0.06), transparent 18%);
+      filter:blur(18px);
+      z-index:0;
+      transform:translate(10%, -8%);
+    }
+
+    .card {
+      position:relative;
+      background:var(--glass);
+      backdrop-filter: blur(6px) saturate(1.05);
+      border-radius:14px;
+      padding:22px;
+      margin: 10px 0 24px;
+      box-shadow: 0 8px 30px rgba(6,40,28,0.08);
+      border:1px solid rgba(11,107,74,0.06);
+      z-index:1;
+      overflow:hidden;
+    }
+
+    .meta {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:12px;
+    }
+    .tag {
+      background:linear-gradient(90deg,#f9f1d0,#fff0b8);
+      color:#0b5136;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:0.9rem;
+      box-shadow:0 3px 12px rgba(212,175,55,0.12);
+    }
+    .ref {
+      color:var(--muted);
+      font-size:0.95rem;
+      opacity:0.95;
+    }
+
+    .hadis {
+      font-family: "Amiri", serif;
+      font-size:1.35rem;
+      color:var(--text);
+      line-height:1.75;
+      margin:8px 0 12px;
+      min-height:84px;
+      transition: transform .45s cubic-bezier(.2,.9,.2,1), opacity .4s ease;
+    }
+
+    .source {
+      font-size:0.98rem;
+      color:#0f5137;
+      opacity:0.9;
+      font-style:italic;
+      margin-bottom:8px;
+    }
+
+    .controls {
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+
+    .btn {
+      padding:10px 18px;
+      border-radius:12px;
+      border:1px solid rgba(11,107,74,0.08);
+      background:linear-gradient(180deg,#ffffff,#f7fff8);
+      color:var(--muted);
+      font-weight:600;
+      cursor:pointer;
+      box-shadow: 0 6px 18px rgba(6,40,28,0.06);
+      transition: all .22s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .btn:hover{
+      transform:translateY(-4px);
+      box-shadow: 0 12px 32px rgba(6,40,28,0.12);
+    }
+    .btn.secondary{
+      background:transparent;
+      border:1px dashed rgba(11,107,74,0.08);
+      color:var(--text);
+    }
+
+    .small {
+      font-size:0.92rem;
+      padding:8px 12px;
+      border-radius:10px;
+    }
+
+    footer {
+      margin-top:auto;
+      width:100%;
+      max-width:900px;
+      color:rgba(4,44,30,0.7);
+      font-size:0.92rem;
+      padding:14px 6px;
+      text-align:center;
+    }
+
+    /* animation helper */
+    .fade-in-up {
+      animation: fadeUp .6s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px) scale(.995); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* responsive */
+    @media (max-width:640px){
+      .hadis { font-size:1.06rem; min-height:92px; }
+      h1 { font-size:1.4rem; }
+      .card { padding:16px; border-radius:12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌿 Hadis Harian — Satu Nasihat Untuk Hati</h1>
+    <div class="sub">Tekan "Tukar Hadis" untuk hadis lain</div>
+  </header>
+
+  <main class="container" role="main" aria-live="polite">
+    <div class="glow" aria-hidden="true"></div>
+
+    <section class="card" id="hadis-card" aria-labelledby="hadis-title">
+      <div class="meta">
+        <div class="tag" id="hadis-number">Hadis 1</div>
+        <div class="ref" id="hadis-theme">Tema: Keimanan</div>
+      </div>
+
+      <div id="hadis-text" class="hadis">Memuatkan hadis...</div>
+      <div id="hadis-source" class="source"></div>
+
+      <div class="controls" aria-hidden="false">
+        <button id="randomBtn" class="btn small" title="Tukar kepada hadis rawak">🔄 Tukar Hadis</button>
+        <button id="allBtn" class="btn small secondary" title="Lihat semua hadis (di bawah)">📚 Lihat Semua</button>
+        <a href="index.html" class="btn small" title="Kembali ke halaman utama">🏠 Halaman Utama</a>
+      </div>
+    </section>
+
+    <!-- Hidden full list (toggleable) -->
+    <section id="all-section" style="display:none; margin-top:10px;">
+      <!-- will be populated by JS -->
+    </section>
+  </main>
+
+  <footer>
+    Senarai hadis ringkas dan sahih untuk pengingatan harian — rujuk sumber tafsir & syarah untuk kefahaman lebih mendalam.
+  </footer>
+
+  <script>
+    // Senarai hadis (30) — ringkas & dengan sumber ringkas
+    const hadiths = [
+      {theme:"Keimanan", text:"“Barang siapa yang mencintai kerana Allah dan membenci kerana Allah, memberi kerana Allah dan menahan kerana Allah, maka sempurnalah imannya.”", src:"Riwayat Abu Dawud"},
+      {theme:"Keimanan", text:"“Tiga perkara yang jika ada pada seseorang, dia akan merasai kemanisan iman: mencintai Allah dan Rasul melebihi segalanya, mencintai seseorang kerana Allah, dan benci kembali kepada kekufuran.”", src:"Riwayat al-Bukhari & Muslim"},
+      {theme:"Keimanan", text:"“Orang mukmin yang kuat lebih dicintai Allah daripada orang mukmin yang lemah, dan pada keduanya ada kebaikan.”", src:"Riwayat Muslim"},
+      {theme:"Kasih Sayang", text:"“Tidak beriman seseorang hingga dia mencintai saudaranya seperti dia mencintai dirinya sendiri.”", src:"Riwayat al-Bukhari & Muslim"},
+      {theme:"Kasih Sayang", text:"“Senyummu kepada saudaramu adalah sedekah.”", src:"Riwayat al-Tirmidzi"},
+      {theme:"Kasih Sayang", text:"“Sayangilah siapa pun yang di bumi, nescaya yang di langit akan menyayangimu.”", src:"Riwayat Abu Dawud"},
+      {theme:"Akhlak", text:"“Sesungguhnya orang yang paling aku cintai dan paling dekat denganku di hari kiamat adalah mereka yang paling baik akhlaknya.”", src:"Riwayat al-Tirmidzi"},
+      {theme:"Akhlak", text:"“Tidak akan berkurang harta kerana bersedekah, dan Allah akan menambah kemuliaan bagi orang yang pemaaf.”", src:"Riwayat Muslim"},
+      {theme:"Akhlak", text:"“Tiada iman bagi orang yang tidak menunaikan amanah.”", src:"Riwayat Ahmad"},
+      {theme:"Sabar & Redha", text:"“Sabar adalah cahaya.”", src:"Riwayat Muslim"},
+      {theme:"Sabar & Redha", text:"“Apabila Allah mencintai seseorang hamba, Dia akan mengujinya.”", src:"Riwayat al-Bukhari"},
+      {theme:"Sabar & Redha", text:"“Sungguh menakjubkan urusan orang mukmin, semuanya baik baginya. Jika mendapat nikmat dia bersyukur, jika ditimpa musibah dia bersabar.”", src:"Riwayat Muslim"},
+      {theme:"Taubat & Ikhlas", text:"“Sesungguhnya setiap amalan bergantung pada niat.”", src:"Riwayat al-Bukhari & Muslim"},
+      {theme:"Taubat & Ikhlas", text:"“Allah membentangkan tangan-Nya di malam hari untuk menerima taubat orang yang berdosa di siang hari.”", src:"Riwayat Muslim"},
+      {theme:"Taubat & Ikhlas", text:"“Setiap anak Adam berdosa, dan sebaik-baik orang berdosa ialah yang bertaubat.”", src:"Riwayat al-Tirmidzi"},
+      {theme:"Doa & Zikir", text:"“Doa adalah senjata orang mukmin.”", src:"Riwayat al-Hakim"},
+      {theme:"Doa & Zikir", text:"“Dengan mengingati Allah hati menjadi tenang.”", src:"Surah ar-Ra'd, ayat 28"},
+      {theme:"Doa & Zikir", text:"“Barang siapa yang banyak beristighfar, Allah akan memberikan jalan keluar bagi setiap kesempitannya dan rezeki dari arah yang tidak disangka.”", src:"Riwayat Ahmad"},
+      {theme:"Doa & Zikir", text:"“Berdoalah kepada Allah dengan penuh keyakinan akan dikabulkan.”", src:"Riwayat al-Tirmidzi"},
+      {theme:"Amal & Sedekah", text:"“Sedekah itu memadamkan dosa seperti air memadamkan api.”", src:"Riwayat al-Tirmidzi"},
+      {theme:"Rahmat", text:"“Rahmat-Ku mendahului kemurkaan-Ku.”", src:"Riwayat Muslim"},
+      {theme:"Syukur", text:"“Siapa yang tidak bersyukur atas yang sedikit, dia tidak akan bersyukur atas yang banyak.”", src:"Riwayat Ahmad"},
+      {theme:"Kebersihan", text:"“Kebersihan adalah sebahagian daripada iman.”", src:"Riwayat Muslim"},
+      {theme:"Tolongan", text:"“Allah akan menolong hamba-Nya selama hamba itu menolong saudaranya.”", src:"Riwayat Muslim"},
+      {theme:"Pemaaf", text:"“Tidak akan berkurang kemuliaan seseorang kerana memaafkan.”", src:"Riwayat Muslim"},
+      {theme:"Lisan", text:"“Barang siapa beriman kepada Allah dan hari akhir, hendaklah berkata baik atau diam.”", src:"Riwayat al-Bukhari & Muslim"},
+      {theme:"Kejujuran", text:"“Sesungguhnya kejujuran membawa kepada kebaikan, dan kebaikan membawa ke syurga.”", src:"Riwayat al-Bukhari"},
+      {theme:"Hati", text:"“Orang terbaik di antara kalian ialah yang hatinya bersih dan lisannya jujur.”", src:"Riwayat Ibn Majah"},
+      {theme:"Tawakal", text:"“Jika kamu bertawakal kepada Allah dengan sebenar-benar tawakal, nescaya Dia akan memberi rezeki seperti burung yang keluar pagi lapar dan pulang kenyang.”", src:"Riwayat al-Tirmidzi"}
+    ];
+
+    // DOM elements
+    const textEl = document.getElementById('hadis-text');
+    const srcEl = document.getElementById('hadis-source');
+    const numEl = document.getElementById('hadis-number');
+    const themeEl = document.getElementById('hadis-theme');
+    const randomBtn = document.getElementById('randomBtn');
+    const allBtn = document.getElementById('allBtn');
+    const allSection = document.getElementById('all-section');
+
+    // Helper: pick random index different from current
+    let currentIndex = -1;
+    function pickRandomIndex(){
+      if(hadiths.length === 0) return -1;
+      if(hadiths.length === 1) return 0;
+      let idx;
+      do {
+        idx = Math.floor(Math.random() * hadiths.length);
+      } while(idx === currentIndex);
+      return idx;
+    }
+
+    // Render a hadith by index with animation
+    function showHadith(idx){
+      if(idx < 0 || idx >= hadiths.length) return;
+      currentIndex = idx;
+      const h = hadiths[idx];
+
+      // subtle animation: fade-out then set then fade-in
+      textEl.style.opacity = '0';
+      textEl.style.transform = 'translateY(8px) scale(.995)';
+      srcEl.style.opacity = '0';
+      numEl.classList.remove('fade-in-up');
+      themeEl.classList.remove('fade-in-up');
+
+      setTimeout(()=>{
+        numEl.textContent = `Hadis ${idx+1}`;
+        themeEl.textContent = `Tema: ${h.theme}`;
+        // set text (keadaan italic di CSS)
+        textEl.innerHTML = `<i>${h.text}</i>`;
+        srcEl.textContent = `— ${h.src}`;
+
+        // animate in
+        textEl.style.opacity = '1';
+        textEl.style.transform = 'translateY(0) scale(1)';
+        srcEl.style.opacity = '1';
+        numEl.classList.add('fade-in-up');
+        themeEl.classList.add('fade-in-up');
+      }, 220);
+    }
+
+    // Show initial hadith on load
+    window.addEventListener('load', ()=>{
+      const idx = pickRandomIndex();
+      showHadith(idx);
+      populateAllList(); // prepare full list if user toggles
+    });
+
+    randomBtn.addEventListener('click', ()=>{
+      const idx = pickRandomIndex();
+      showHadith(idx);
+    });
+
+    // Toggle full list
+    let allVisible = false;
+    allBtn.addEventListener('click', ()=>{
+      allVisible = !allVisible;
+      if(allVisible){
+        allSection.style.display = 'block';
+        allBtn.textContent = '🔽 Tutup Senarai';
+        // smooth scroll to list
+        allSection.scrollIntoView({behavior:'smooth', block:'start'});
+      } else {
+        allSection.style.display = 'none';
+        allBtn.textContent = '📚 Lihat Semua';
+      }
+    });
+
+    // Populate the full list (simple cards)
+    function populateAllList(){
+      if(!allSection) return;
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'grid';
+      wrapper.style.gridTemplateColumns = 'repeat(auto-fit,minmax(260px,1fr))';
+      wrapper.style.gap = '12px';
+      wrapper.style.marginTop = '10px';
+
+      hadiths.forEach((h, i) => {
+        const c = document.createElement('div');
+        c.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,255,250,0.95))';
+        c.style.padding = '12px';
+        c.style.borderRadius = '10px';
+        c.style.boxShadow = '0 6px 18px rgba(6,40,28,0.05)';
+        c.style.border = '1px solid rgba(11,107,74,0.04)';
+        c.innerHTML = `<div style="font-weight:700;color:#0b5136;margin-bottom:6px">#${i+1} — ${h.theme}</div>
+                       <div style="font-family:Amiri,serif; font-size:1rem; color:var(--text); line-height:1.45; margin-bottom:8px;">${h.text}</div>
+                       <div style="font-style:italic;color:#125c43;font-size:.92rem">— ${h.src}</div>`;
+        // clicking a small card shows it in main view
+        c.style.cursor = 'pointer';
+        c.addEventListener('click', ()=>{ showHadith(i); window.scrollTo({top:0,behavior:'smooth'}); });
+        wrapper.appendChild(c);
+      });
+      allSection.appendChild(wrapper);
+    }
+  </script>
+</body>
+</html>
+
+
