@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💬 Maklum Balas - Keindahan Al-Quran</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0a4d3c;
+  --secondary: #d4af37;
+  --accent: #1a7f64;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0a4d3c 0%, #042b1f 100%);
+  color: #fff;
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background Effects */
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.15), transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(26, 127, 100, 0.2), transparent 50%);
+  z-index: -1;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeInDown 0.8s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(to right, #fff, #d4af37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #a8d5c5;
+  line-height: 1.6;
+}
+
+/* Main Content */
+.feedback-container {
+  background: rgba(26, 127, 100, 0.2);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 20px;
+  padding: 3rem;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.info-box {
+  background: rgba(212, 175, 55, 0.1);
+  border-left: 4px solid #d4af37;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-box h3 {
+  color: #d4af37;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.info-box p {
+  color: #b8e0d2;
+  line-height: 1.6;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  color: #d4af37;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.required {
+  color: #ff6b6b;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(10, 77, 60, 0.3);
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  transition: all 0.3s;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+select {
+  cursor: pointer;
+  background: rgba(10, 77, 60, 0.6);
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.6;
+  min-height: 150px;
+}
+
+/* Star Rating */
+.rating-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.star-rating {
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  filter: grayscale(100%);
+}
+
+.star-rating:hover {
+  transform: scale(1.2);
+}
+
+.star-rating.active {
+  filter: grayscale(0%);
+}
+
+/* Checkboxes */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.8rem;
+  background: rgba(10, 77, 60, 0.3);
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.checkbox-label:hover {
+  background: rgba(212, 175, 55, 0.2);
+  transform: translateX(5px);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, #d4af37, #f4d03f);
+  color: #042b1f;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+  margin-top: 1rem;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.5);
+}
+
+.submit-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Success Message */
+.success-message {
+  display: none;
+  padding: 2rem;
+  background: rgba(74, 222, 128, 0.2);
+  border: 2px solid #4ade80;
+  border-radius: 12px;
+  text-align: center;
+  animation: fadeInUp 0.6s ease;
+}
+
+.success-message .icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.success-message h2 {
+  color: #4ade80;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.success-message p {
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+  margin-top: 2rem;
+}
+
+.back-btn:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .feedback-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .rating-container {
+    gap: 0.5rem;
+  }
+  
+  .star-rating {
+    font-size: 2rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-overlay"></div>
+<div class="stars" id="stars"></div>
+
+<div class="container">
+  <header>
+    <div class="logo">💬</div>
+    <h1>Maklum Balas & Cadangan</h1>
+    <p class="subtitle">Kami menghargai pendapat anda untuk menjadikan portal ini lebih baik</p>
+  </header>
+
+  <div class="feedback-container">
+    
+    <div class="info-box">
+      <h3>📌 Kenapa maklum balas anda penting?</h3>
+      <p>Setiap cadangan, laporan masalah, atau pujian anda membantu kami meningkatkan kualiti portal ini. Kami komited untuk menyediakan pengalaman terbaik kepada umat Islam di Malaysia.</p>
+    </div>
+
+    <form id="feedbackForm">
+      
+      <!-- Name -->
+      <div class="form-group">
+        <label for="userName">👤 Nama (Pilihan)</label>
+        <input type="text" id="userName" placeholder="Masukkan nama anda">
+      </div>
+      
+      <!-- Email -->
+      <div class="form-group">
+        <label for="userEmail">📧 Email (Pilihan)</label>
+        <input type="email" id="userEmail" placeholder="email@example.com">
+        <small style="color: #a8d5c5; font-size: 0.9rem; margin-top: 0.5rem; display: block;">Untuk maklum balas atau tindakan susulan dari kami</small>
+      </div>
+      
+      <!-- Category -->
+      <div class="form-group">
+        <label for="feedbackCategory">📂 Kategori</label>
+        <select id="feedbackCategory">
+          <option value="cadangan">💡 Cadangan</option>
+          <option value="masalah">⚠️ Laporan Masalah</option>
+          <option value="pujian">⭐ Pujian</option>
+          <option value="pertanyaan">❓ Pertanyaan</option>
+          <option value="lain">📝 Lain-lain</option>
+        </select>
+      </div>
+      
+      <!-- Rating -->
+      <div class="form-group">
+        <label>⭐ Penilaian Portal</label>
+        <div class="rating-container" id="ratingStars">
+          <span class="star-rating" data-rating="1" onclick="setRating(1)">⭐</span>
+          <span class="star-rating" data-rating="2" onclick="setRating(2)">⭐</span>
+          <span class="star-rating" data-rating="3" onclick="setRating(3)">⭐</span>
+          <span class="star-rating" data-rating="4" onclick="setRating(4)">⭐</span>
+          <span class="star-rating" data-rating="5" onclick="setRating(5)">⭐</span>
+        </div>
+        <input type="hidden" id="userRating" value="5">
+        <div style="text-align: center; margin-top: 0.5rem; color: #d4af37; font-weight: 600;" id="ratingText">Cemerlang (5/5)</div>
+      </div>
+      
+      <!-- Message -->
+      <div class="form-group">
+        <label for="feedbackMessage">💬 Mesej <span class="required">*</span></label>
+        <textarea id="feedbackMessage" placeholder="Tulis maklum balas, cadangan atau masalah yang anda hadapi di sini..." required></textarea>
+      </div>
+      
+      <!-- Pages -->
+      <div class="form-group">
+        <label>📄 Halaman yang berkaitan (pilih semua yang berkenaan)</label>
+        <div class="checkbox-grid">
+          <label class="checkbox-label">
+            <input type="checkbox" name="pages" value="index">
+            <span>🏠 Halaman Utama</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="pages" value="surah">
+            <span>🕌 Surah</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="pages" value="doa">
+            <span>🤲 Doa Harian</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="pages" value="hadith">
+            <span>📜 Hadis</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="pages" value="ayat">
+            <span>📖 Ayat Harian</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="pages" value="renungan">
+            <span>💫 Renungan</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="pages" value="waktu-solat">
+            <span>🕌 Waktu Solat</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" name="pages" value="maklumat">
+            <span>💡 Maklumat</span>
+          </label>
+        </div>
+      </div>
+      
+      <!-- Submit -->
+      <button type="submit" class="submit-btn">📤 Hantar Maklum Balas</button>
+      
+    </form>
+    
+    <!-- Success Message (Hidden by default) -->
+    <div class="success-message" id="successMessage">
+      <div class="icon">✅</div>
+      <h2>Terima Kasih!</h2>
+      <p>Maklum balas anda telah berjaya dihantar. Kami menghargai input anda dan akan menggunakan maklumat ini untuk menjadikan portal ini lebih baik! 🌟</p>
+      <p style="margin-top: 1rem; font-size: 1rem; color: #a8d5c5;">Anda akan dibawa kembali ke halaman utama dalam <span id="countdown">5</span> saat...</p>
+    </div>
+    
+    <div style="text-align: center;">
+      <a href="index.html" class="back-btn">
+        ← Kembali ke Halaman Utama
+      </a>
+    </div>
+    
+  </div>
+</div>
+
+<script>
+// Generate Stars
+const starsContainer = document.getElementById('stars');
+for(let i = 0; i < 80; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.animationDelay = Math.random() * 3 + 's';
+  starsContainer.appendChild(star);
+}
+
+// Star Rating System
+let selectedRating = 5;
+const ratingTexts = {
+  1: 'Sangat Tidak Puas Hati (1/5)',
+  2: 'Tidak Puas Hati (2/5)',
+  3: 'Sederhana (3/5)',
+  4: 'Baik (4/5)',
+  5: 'Cemerlang (5/5)'
+};
+
+function setRating(rating) {
+  selectedRating = rating;
+  document.getElementById('userRating').value = rating;
+  document.getElementById('ratingText').textContent = ratingTexts[rating];
+  
+  const stars = document.querySelectorAll('.star-rating');
+  stars.forEach((star, index) => {
+    if (index < rating) {
+      star.classList.add('active');
+    } else {
+      star.classList.remove('active');
+    }
+  });
+}
+
+// Initialize rating
+setRating(5);
+
+// Form Submission
+document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('userName').value || 'Anonymous';
+  const email = document.getElementById('userEmail').value || 'Tidak diberikan';
+  const category = document.getElementById('feedbackCategory').value;
+  const rating = document.getElementById('userRating').value;
+  const message = document.getElementById('feedbackMessage').value;
+  
+  // Get selected pages
+  const selectedPages = [];
+  document.querySelectorAll('input[name="pages"]:checked').forEach(checkbox => {
+    selectedPages.push(checkbox.value);
+  });
+  
+  // Log to console (in real app, send to server)
+  console.log('📝 MAKLUM BALAS DITERIMA:');
+  console.log('=====================================');
+  console.log('Nama:', name);
+  console.log('Email:', email);
+  console.log('Kategori:', category);
+  console.log('Rating:', rating + '/5 ⭐');
+  console.log('Mesej:', message);
+  console.log('Halaman:', selectedPages.join(', ') || 'Tiada');
+  console.log('Timestamp:', new Date().toLocaleString('ms-MY'));
+  console.log('=====================================');
+  
+  // Show success message
+  document.querySelector('form').style.display = 'none';
+  document.getElementById('successMessage').style.display = 'block';
+  
+  // Countdown and redirect
+  let timeLeft = 5;
+  const countdownEl = document.getElementById('countdown');
+  const countdownInterval = setInterval(() => {
+    timeLeft--;
+    countdownEl.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(countdownInterval);
+      window.location.href = 'index.html';
+    }
+  }, 1000);
+});
+
+// Hover effects for stars
+document.querySelectorAll('.star-rating').forEach(star => {
+  star.addEventListener('mouseenter', function() {
+    const rating = parseInt(this.dataset.rating);
+    const stars = document.querySelectorAll('.star-rating');
+    stars.forEach((s, index) => {
+      if (index < rating) {
+        s.style.filter = 'grayscale(0%)';
+      }
+    });
+  });
+  
+  star.addEventListener('mouseleave', function() {
+    setRating(selectedRating);
+  });
+});
+</script>
+
+</body>
+</html>
